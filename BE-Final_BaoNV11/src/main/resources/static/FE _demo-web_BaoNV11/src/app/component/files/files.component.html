@@ -1,0 +1,43 @@
+<div *ngIf="currentFile" class="progress">
+  <div
+    class="progress-bar progress-bar-info progress-bar-striped"
+    role="progressbar"
+    attr.aria-valuenow="{{ progress }}"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    [ngStyle]="{ width: progress + '%' }"
+  >
+    {{ progress }}%
+  </div>
+</div>
+
+<label class="btn btn-default">
+  <input type="file" (change)="selectFile($event)" />
+</label>
+
+<button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">
+  Upload
+</button>
+
+<div class="alert alert-light" role="alert">{{ message }}</div>
+
+<div class="card">
+  <div class="card-header">List of Files</div>
+
+  <div>
+    <table class="table">
+      <thead class="thead-dark">
+      <tr class="mat-header-row">
+        <th class='mat-header-cell'>Document Name</th>
+        <th class='mat-header-cell'>Permission</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="mat-row" *ngFor="let file of contents">
+        <td class="mat-cell"><a href="{{ baseUrl }}{{file['documentNo']}}">{{file['fileName']}}</a></td>
+        <td class="mat-cell">{{file['permissionName']}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
